@@ -1,0 +1,77 @@
+{% load static %}
+
+<div class="tab-pane" id="pills-contacts" role="tabpanel" aria-labelledby="pills-contacts-tab">
+    <!-- Start Contact content -->
+    <div>
+        <div class="p-4">
+            <div class="user-chat-nav float-end">
+                <div data-bs-toggle="tooltip" data-bs-placement="bottom" title="Add Contact">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-link text-decoration-none text-muted font-size-18 py-0" data-bs-toggle="modal" data-bs-target="#addContact-exampleModal">
+                        <i class="ri-user-add-line"></i>
+                    </button>
+                </div>
+            </div>
+            <h4 class="mb-4">Contacts</h4>
+
+            <!-- Start Add contact Modal -->
+            
+            <!-- End Add contact Modal -->
+
+            <div class="search-box chat-search-box">
+                <div class="input-group bg-light  input-group-lg rounded-3">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-link text-decoration-none text-muted pe-1 ps-3" type="button">
+                            <i class="ri-search-line search-icon font-size-18"></i>
+                        </button>
+                    </div>
+                    <input type="text" class="form-control bg-light" placeholder="Search users..">
+                </div>
+            </div>
+            <!-- End search-box -->
+        </div>
+        <!-- end p-4 -->
+
+        <!-- Start contact lists -->
+        <div class="p-4 chat-message-list chat-group-list" data-simplebar>
+
+            <div>
+               
+
+                <ul class="list-unstyled chat-list chat-list chat-user-list contact-list">
+                    
+                    {% for contact in contacts %}
+                        <li>
+                        <a href="{% url 'receiver' contact.friend.username %}#{{contact.friend.username}}">
+                            <div class="d-flex align-items-cneter">
+                                <div class="chat-user-img align-self-center me-3 ms-0 {% if request.user.is_online %}online {% else %} away {% endif %}">
+                                        <img src="{% if contact.friend.image %}{{contact.friend.image.url}}{% else %}{% static 'assets/images/users/avatar-3.jpg' %}{% endif %}" class="rounded-circle avatar-xs" alt="">
+                                        <span class="user-status"></span>
+                                </div>
+                                <div class="flex-grow-1 overflow-hidden ">
+                                    <div class="">
+                                        <h5 class="text-truncate font-size-14 mb-0">{{contact.friend.username}}</h5>
+                                        <small class="text-truncate mb-0">{{contact.friend.location}}</small>
+                                    </div>
+                                
+                                    
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    {% empty %}
+                        No Friend Found
+                    {% endfor %}
+                        
+
+                </ul>
+            </div>
+            <!-- end contact list A -->
+
+           
+            <!-- end contact list S -->
+        </div>
+        <!-- end contact lists -->
+    </div>
+    <!-- Start Contact content -->
+</div>

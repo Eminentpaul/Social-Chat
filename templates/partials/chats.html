@@ -1,0 +1,145 @@
+{% load static %}
+{% load humanize %}
+
+
+<div class="tab-pane fade show active" id="pills-chat" role="tabpanel" aria-labelledby="pills-chat-tab">
+    <!-- Start chats content -->
+    <div>
+        <div class="px-4 pt-4">
+            <h4 class="mb-4">Chats</h4>
+            <div class="search-box chat-search-box">            
+                <div class="input-group mb-3 rounded-3">
+                    <span class="input-group-text text-muted bg-light pe-1 ps-3" id="basic-addon1">
+                        <i class="ri-search-line search-icon font-size-18"></i>
+                    </span>
+                    <input type="text" class="form-control bg-light" placeholder="Search messages or users" aria-label="Search messages or users" aria-describedby="basic-addon1">
+                </div> 
+            </div> <!-- Search Box-->
+        </div> <!-- .p-4 -->
+
+        <!-- Start user status -->
+        <div class="px-4 pb-4" dir="ltr">                
+            <div class="d-flex flex-row gap-3 overflow-auto w-100">
+                
+                {% for user  in contacts %}
+                    
+                    {% if user.friend.is_online %}
+                        <div class="item">
+
+                            <ul class="list-unstyled chat-list chat-user-list">
+                                <li>
+                                    <a href="{% url 'receiver' user.friend.username %}#" class="btn btn-outline-primary">
+                                        <div class="avatar-xs mx-auto d-block chat-user-img online">
+                                            <img src="
+                                            {% if user.friend.image %}
+                                                {{user.friend.image.url}}
+                                            {% else %}
+                                                {% static 'assets/images/users/avatar-2.jpg' %}
+                                            {% endif %}
+                                                " alt="user-img" class="img-fluid rounded-circle">
+                                            <span class="user-status"></span>
+                                        </div>
+
+                                        <h5 class="font-size-13 text-truncate mt-3 mb-1">{{user.friend.username}}</h5>
+                                    </a>
+                                </li>
+                            </ul>
+                            
+                        </div>
+                    {% endif %}
+                        
+                {% endfor %}
+                    
+            </div>
+        </div>
+            <!-- end user status carousel -->
+       
+        <!-- end user status -->
+
+        <!-- Start chat-message-list -->
+        <div class="">
+            <h5 class="mb-3 px-3 font-size-16">Recent</h5>
+
+            <div class="chat-message-list px-2" data-simplebar>
+
+                <ul class="list-unstyled chat-list chat-user-list">
+                    
+                    {% for chat in chat_list  %}
+                        <li class="unread typing">
+                            <a href="{% if chat.sender == request.user %}
+                            {% url 'receiver' chat.receiver.username %}#{{chat.receiver.username}}
+
+                            {% else %}
+                            {% url 'receiver' chat.sender.username %}#{{chat.sender.username}}
+                            {% endif %}">
+                                <div class="d-flex">
+                                    <div class="chat-user-img align-self-center me-3 ms-0 {% if request.user.is_online %}online {% else %} away {% endif %}">
+
+                                        {% if chat.sender == request.user %}
+                                        <img src="{% if chat.receiver.image %}
+                                            {{chat.receiver.image.url}}
+                                        {% else %}
+                                        {% static 'assets/images/users/avatar-3.jpg' %}
+                                        {% endif %}" class="rounded-circle avatar-xs" alt="">
+                                        <span class="user-status"></span>
+                                        {% else %}
+                                            <img src="{% if chat.sender.image %}
+                                            {{chat.sender.image.url}}
+                                            {% else %}
+                                            {% static 'assets/images/users/avatar-3.jpg' %}
+                                            {% endif %}" class="rounded-circle avatar-xs" alt="">
+                                            <span class="user-status"></span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="flex-grow-1 overflow-hidden">
+                                        {% if chat.sender == request.user %}
+                                        <h5 class="text-truncate font-size-15 mb-1">{{chat.receiver.username}}</h5>
+                                        {% else %}
+                                        <h5 class="text-truncate font-size-15 mb-1">{{chat.sender.username}}</h5>
+                                        {% endif %}
+
+
+                                        {% if chat.body %}
+                                            <p class="chat-user-message text-truncate mb-0">{{chat.body}}</p>
+                                        {% endif %}
+                                        {% if chat.image %}
+                                            <p class="chat-user-message text-truncate mb-0"><i class="ri-image-fill align-middle me-1 ms-0"></i> Images</p> 
+                                        {% endif %}
+                                        <p class="chat-user-message text-truncate mb-0">typing<span class="animate-typing">
+                                            <span class="dot"></span>
+                                            <span class="dot"></span>
+                                            <span class="dot"></span>
+                                        </span></p>
+                                    </div>
+
+                                    {% comment %} {{chat.created|date:"Y-m-d"}}  | {{dt}} {% endcomment %}
+
+                                    {% if chat.created|date:"Y-m-d" == dt %}
+                                    
+                                    <div class="font-size-11">{{chat.created|time}}</div>        
+                                    {% else %}
+
+                                    <div class="font-size-11">{{chat.created|naturalday|title}}</div>        
+                                    {% endif %} 
+                                    <div class="unread-message">
+                                        {% if not chat.is_read %}
+                                            {% if chat.receiver == request.user %}
+                                                <span class="badge badge-soft-danger rounded-pill">Unread</span>
+                                            {% endif %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+
+                    {% empty %}
+                        No Chat Availalbe Now
+                    {% endfor %}
+                        
+                </ul>
+            </div>
+        </div>
+        <!-- End chat-message-list -->
+    </div>
+    <!-- Start chats content -->
+</div>

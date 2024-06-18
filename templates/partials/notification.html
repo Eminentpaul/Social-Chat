@@ -1,0 +1,68 @@
+{% load static %}
+
+
+<div class="tab-pane" id="pills-notification" role="tabpanel" aria-labelledby="pills-groups-tab">
+    <!-- Start Groups content -->
+    <div>
+        <div class="p-4">
+            <div class="user-chat-nav float-end">
+                <div  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Create group">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-link text-decoration-none text-muted font-size-18 py-0" data-bs-toggle="modal" data-bs-target="#addgroup-exampleModal">
+                        <i class="ri-group-line me-1 ms-0"></i>
+                    </button>
+                </div>
+
+            </div>
+            <h4 class="mb-4">Groups</h4>
+
+            <!-- Start add group Modal -->
+            {% include 'partials/create-group.html' %}
+            <!-- End add group Modal -->
+
+            <div class="search-box chat-search-box">            
+                <div class="input-group rounded-3">
+                    <span class="input-group-text text-muted bg-light pe-1 ps-3" id="basic-addon1">
+                        <i class="ri-search-line search-icon font-size-18"></i>
+                    </span>
+                    <input type="text" class="form-control bg-light" placeholder="Search user" aria-label="Search groups..." aria-describedby="basic-addon1">
+                </div> 
+            </div> <!-- Search Box-->
+        </div>
+
+        <!-- Start chat-group-list -->
+        <div class="p-4 chat-message-list chat-group-list" data-simplebar>
+
+
+            <ul class="list-unstyled chat-list">
+                
+                {% for friend in friend_requests %}
+                    <li>
+                    <a href="{% url 'accept' friend.id %}">
+                        <div class="d-flex align-items-cneter">
+                            <div class="chat-user-img align-self-center me-3 ms-0 {% if request.user.is_online %}online {% else %} away {% endif %}">
+                                    <img src="{% if friend.sender.image %}{{friend.sender.image.url}}{% else %}{% static 'assets/images/users/avatar-3.jpg' %}{% endif %}" class="rounded-circle avatar-xs" alt="">
+                                    <span class="user-status"></span>
+                            </div>
+                            <div class="flex-grow-1 overflow-hidden d-flex justify-content-between">
+                                <div class="">
+                                     <h5 class="text-truncate font-size-14 mb-0">{{friend.sender.username}}</h5>
+                                    <small class="text-truncate mb-0">{{friend.sender.location}}</small>
+                                </div>
+                               
+                                <button class="text-truncate font-size-14 mb-0 btn btn-success">Accept</button>
+                                
+                            </div>
+                        </div>
+                    </a>
+                    <a href="{% url 'reject' friend.id %}" class='d-inline btn btn-outline-danger btn-sm' style="color:red">Reject</a>
+                </li>
+                {% endfor %}
+                    
+
+            </ul>
+        </div>
+        <!-- End chat-group-list -->
+    </div>
+    <!-- End Groups content -->
+</div>
