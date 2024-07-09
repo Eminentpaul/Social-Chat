@@ -1,8 +1,8 @@
 from django.forms import ModelForm
-from base.models import User
+from .models import Profile
 
 
-class UpdateAccount(ModelForm):
+class UpdateProfileForm(ModelForm):
     class Meta:
-        model = User
-        fields = ['image', 'first_name', 'last_name', 'email', 'location']
+        model = Profile
+        exclude = ['user', 'followers'] 

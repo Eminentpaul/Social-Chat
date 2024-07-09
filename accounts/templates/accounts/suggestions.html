@@ -1,0 +1,230 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <!-- Bottom Menu start -->
+    {% include "includes/bottom-menu.html" %}
+    <!-- Bottom Menu end -->
+
+    <!-- Main Content start -->
+    <main class="main-content">
+        <div class="container">
+            <div class="row">
+                {% include "includes/sidebar.html" %}
+
+                <div class="col-xl-9 col-lg-8">
+                    <div class="row cus-mar friend-request">
+                        {% for user in user_list %}
+                
+                            <div class="col-xl-4 col-sm-6 col-8">
+                                <div class="single-box p-5">
+                                <div style="max-height:200px; overflow:hidden" class="avatar">
+                                    <img style="object-fit:cover"
+                                    class="avatar-img w-100"
+                                    src="{{user.profile.avatar}}"
+                                    alt="avatar"
+                                    />
+                                </div>
+                                <a href="{% url 'profile' user.id %}"
+                                    ><h6 class="m-0 mb-2 mt-3">{{user.profile.display_name}}</h6></a
+                                >
+                                <div class="friends-list d-center gap-1 text-center">
+                                    
+                                    <span class="smtxt m-0">{{user.profile.location}}</span>
+                                </div>
+                                <div class="d-center gap-2 mt-4">
+                                    
+                                    {% for request in my_requests %}
+                                        
+                                        {% if request.accepter == user %}
+                                        <a href="{% url 'reject' request.id %}" class="cmn-btn alt">Cancle</a>
+                                        {% else %}
+                                        <a href="{% url 'add' user.id %}" class="cmn-btn">Add Confidant</a>
+                                        {% endif %}
+                                            {% empty %}
+                                            <a href="{% url 'add' user.id %}" class="cmn-btn">Add Confidant</a>
+                                    {% endfor %}
+                                        
+                                    
+                                </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Main Content end -->
+
+    <!-- Go Live Popup start -->
+    <div class="go-live-popup">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="modal cmn-modal fade" id="goLiveMod">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content p-5">
+                                <div class="modal-header justify-content-center">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                        <i class="material-symbols-outlined mat-icon xxltxt"> close </i>
+                                    </button>
+                                </div>
+                                <div class="top-content pb-5">
+                                    <h5>Go Live</h5>
+                                </div>
+                                <div class="mid-area">
+                                    <div class="d-flex mb-5 gap-3">
+                                        <div class="profile-box">
+                                            <a href="#"><img src="{% static 'assets/images/add-post-avatar.png' %}" class="max-un" alt="icon"></a>
+                                        </div>
+                                        <textarea cols="10" rows="2" placeholder="Write something to Lerio.."></textarea>
+                                    </div>
+                                    <div class="file-upload">
+                                        <label>Upload attachment</label>
+                                        <label class="file mt-1">
+                                            <input type="file">
+                                            <span class="file-custom pt-8 pb-8 d-grid text-center">
+                                                <i class="material-symbols-outlined mat-icon"> perm_media </i>
+                                                <span>Drag here or click to upload photo.</span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="footer-area pt-5">
+                                    <div class="btn-area d-flex justify-content-end gap-2">
+                                        <button type="button" class="cmn-btn alt" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                                        <button class="cmn-btn">Go Live</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Go Live Popup end -->
+
+    <!-- video popup start -->
+    <div class="go-live-popup video-popup">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="modal cmn-modal fade" id="photoVideoMod">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content p-5">
+                                <div class="modal-header justify-content-center">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                        <i class="material-symbols-outlined mat-icon xxltxt"> close </i>
+                                    </button>
+                                </div>
+                                <div class="top-content pb-5">
+                                    <h5>Add post photo/video</h5>
+                                </div>
+                                <div class="mid-area">
+                                    <div class="d-flex mb-5 gap-3">
+                                        <div class="profile-box">
+                                            <a href="#"><img src="{% static 'assets/images/add-post-avatar.png' %}" class="max-un" alt="icon"></a>
+                                        </div>
+                                        <textarea cols="10" rows="2" placeholder="Write something to Lerio.."></textarea>
+                                    </div>
+                                    <div class="file-upload">
+                                        <label>Upload attachment</label>
+                                        <label class="file mt-1">
+                                            <input type="file">
+                                            <span class="file-custom pt-8 pb-8 d-grid text-center">
+                                                <i class="material-symbols-outlined mat-icon"> perm_media </i>
+                                                <span>Drag here or click to upload photo.</span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="footer-area pt-5">
+                                    <div class="btn-area d-flex justify-content-end gap-2">
+                                        <button type="button" class="cmn-btn alt" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                                        <button class="cmn-btn">Post</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- video popup end -->
+
+    <!-- Go Live Popup start -->
+    <div class="go-live-popup">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="modal cmn-modal fade" id="activityMod">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content p-5">
+                                <div class="modal-header justify-content-center">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                        <i class="material-symbols-outlined mat-icon xxltxt"> close </i>
+                                    </button>
+                                </div>
+                                <div class="top-content pb-5">
+                                    <h5>Create post</h5>
+                                </div>
+                                <div class="mid-area">
+                                    <div class="d-flex mb-5 gap-3">
+                                        <div class="profile-box">
+                                            <a href="#"><img src="{% static 'assets/images/add-post-avatar.png' %}" class="max-un" alt="icon"></a>
+                                        </div>
+                                        <textarea cols="10" rows="2" placeholder="Write something to Lerio.."></textarea>
+                                    </div>
+                                    <div class="file-upload">
+                                        <label>Upload attachment</label>
+                                        <label class="file mt-1">
+                                            <input type="file">
+                                            <span class="file-custom pt-8 pb-8 d-grid text-center">
+                                                <i class="material-symbols-outlined mat-icon"> perm_media </i>
+                                                <span>Drag here or click to upload photo.</span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="tooltips-area d-flex mt-3 gap-2">
+                                        <button type="button" class="btn d-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Fallings/Activity">
+                                            <i class="material-symbols-outlined mat-icon"> mood </i>
+                                        </button>
+                                        <button type="button" class="btn d-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Video">
+                                            <i class="material-symbols-outlined mat-icon"> movie </i>
+                                        </button>
+                                        <button type="button" class="btn d-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Maps">
+                                            <i class="material-symbols-outlined mat-icon"> location_on </i>
+                                        </button>
+                                        <button type="button" class="btn d-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Tag">
+                                            <i class="material-symbols-outlined mat-icon"> sell </i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="footer-area d-flex justify-content-between pt-5">
+                                    <div class="left-area">
+                                        <select>
+                                            <option value="1">Public</option>
+                                            <option value="2">Only Me</option>
+                                            <option value="3">Friends</option>
+                                            <option value="4">Custom</option>
+                                        </select>
+                                    </div>
+                                    <div class="btn-area d-flex justify-content-end gap-2">
+                                        <button type="button" class="cmn-btn alt" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                                        <button class="cmn-btn">Post</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Go Live Popup end -->
+
+  {%endblock%}

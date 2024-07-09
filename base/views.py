@@ -5,14 +5,41 @@ import requests
 from .forms import UserForm, UpdateAccountImage
 from .models import User
 from django.contrib.auth.decorators import login_required
+from accounts.models import FriendRequest, Contact
 
 
 
 # Create your views here.
+@login_required(login_url='login')
+def feeds(request):
+    user = request.user
+    contact_list = []
+    user_list = []
+
+    friend_requests = FriendRequest.objects.filter(
+        accepter=user, is_accepted=False)
+    
+    contacts = Contact.objects.all().filter(user=request.user)
+    users = User.objects.all().exclude(email=user)
+
+    for contact in contacts:
+        contact_list.append(contact.friend.email)
+
+    for user in users:
+        if user.email not in contact_list:
+            user_list.append(user)
+    
+    context = {
+        'friend_requests': friend_requests,
+        'contacts': contacts,
+        'users': user_list,
+    }
+    return render(request, 'base/index.html', context)
+
 
 def login(request):
     if request.user.is_authenticated:
-        return redirect('chats')
+        return redirect('feeds')
 
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -35,7 +62,7 @@ def login(request):
                     return redirect(nextPage)
             except:
                 mg.success(request, 'You Successfully Logged In!')
-                return redirect('chats')
+                return redirect('feeds')
         else:
             mg.error(request, 'Invalid Username or Password')
     return render(request, 'login.html')
@@ -63,7 +90,7 @@ def register(request):
             auth.login(request, user)
             
             mg.success(request, 'Login Successful')
-            return redirect('chats')
+            return redirect('feeds')
 
         else:
             errors = form.errors.get_json_data(escape_html=True)

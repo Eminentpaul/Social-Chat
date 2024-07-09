@@ -1,0 +1,22 @@
+<div class="page-details">
+    <ul class="nav mt-5 pt-4 flex-wrap gap-2 tab-area">
+        <li class="nav-item" role="presentation">
+            <a href="public-profile-post.html" class="nav-link d-center">Post</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a href="{% url 'profile' profile.id %}" class="nav-link d-center active">About</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a href="public-profile-photos.html" class="nav-link d-center">Photos</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a href="public-profile-group.html" class="nav-link d-center">Groups</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a href="{% url 'connections' profile.id %}" class="nav-link d-center">Connections</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a href="public-profile-events.html" class="nav-link d-center">Events</a>
+        </li>
+    </ul>
+</div>

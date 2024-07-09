@@ -1,0 +1,423 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    
+
+    {% include "includes/bottom-menu.html" %}
+
+    <!-- Main Content start -->
+    <main class="main-content">
+        <div class="container sidebar-toggler">
+            <div class="row">
+                {% include "includes/sidebar.html" %}
+                <div class="col-xxl-6 col-xl-5 col-lg-8 mt-0 mt-lg-10 mt-xl-0 d-flex flex-column gap-7 ">
+                   
+                    <div class="share-post d-flex gap-3 gap-sm-5 p-3 p-sm-5">
+                        <div style="max-height:48px; max-width:48px; overflow:hidden" class="profile-box">
+                            <a href="#"><img style="object-fit:cover" src="{{user.profile.avatar}}" class="max-un" alt="icon"></a>
+                        </div>
+                        <form action="#" class="w-100 position-relative">
+                            <textarea cols="10" rows="2" placeholder="Write something to Lerio.."></textarea>
+                            <div class="abs-area position-absolute d-none d-sm-block">
+                                <i class="material-symbols-outlined mat-icon xxltxt"> sentiment_satisfied </i>
+                            </div>
+                            <ul class="d-flex justify-content-between flex-wrap mt-3 gap-3">
+                                <li class="d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#goLiveMod">
+                                    <img src="{% static 'assets/images/live-video.png' %}" class="max-un" alt="icon">
+                                    <span>Live</span>
+                                </li>
+                                <li class="d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#photoVideoMod">
+                                    <img src="{% static 'assets/images/vgallery.png' %}" class="max-un" alt="icon">
+                                    <span>Photo/Video</span>
+                                </li>
+                                <li class="d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#activityMod">
+                                    <img src="{% static 'assets/images/emoji-laughing.png' %}" class="max-un" alt="icon">
+                                    <span>Fallings/Activity</span>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+
+
+                    
+                    <div class="post-item d-flex flex-column gap-5 gap-md-7" id="news-feed">
+                        <div class="post-single-box p-3 p-sm-5">
+                            <div class="top-area pb-5">
+                                <div class="profile-area d-center justify-content-between">
+                                    <div class="avatar-item d-flex gap-3 align-items-center">
+                                        <div class="avatar position-relative">
+                                            <img class="avatar-img max-un" src="{% static 'assets/images/avatar-1.png' %}" alt="avatar">
+                                        </div>
+                                        <div class="info-area">
+                                            <h6 class="m-0"><a href="public-profile-post.html">Lori Cortez</a></h6>
+                                            <span class="mdtxt status">2:00 pm</span>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="py-4">
+                                    <p class="description">I created Roughly plugin to sketch crafted hand-drawn elements which can be used to any usage (diagrams/flows/decoration/etc)</p>
+                                </div>
+                                <div class="post-img" data-bs-toggle="modal" data-bs-target="#imageView">
+                                    <img src="{% static 'assets/images/post-img-1.png' %}" class="w-100" alt="image">
+                                </div>
+                            </div>
+                            <div class="total-react-share pb-4 d-center gap-2 flex-wrap justify-content-between">
+                                <div class="friends-list d-flex gap-3 align-items-center text-center">
+                                    <ul class="d-flex align-items-center justify-content-center">
+                                        <li><img src="{% static 'assets/images/avatar-2.png' %}" alt="image"></li>
+                                        <li><img src="{% static 'assets/images/avatar-3.png' %}" alt="image"></li>
+                                        <li><img src="{% static 'assets/images/avatar-4.png' %}" alt="image"></li>
+                                        <li><span class="mdtxt d-center">8+</span></li>
+                                    </ul>
+                                </div>
+                                <div class="react-list d-flex flex-wrap gap-6 align-items-center text-center">
+                                    <button class="mdtxt">4 Comments</button>
+                                    <button class="mdtxt">1 Shares</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Post Comments start -->
+                            <div class="comments-area mt-5">
+                                <div class="single-comment-area ms-1 ms-xxl-15">
+                                    <div class="parent-comment d-flex gap-2 gap-sm-4">
+                                        
+                                        <div class="info-item">
+                                            <ul class="like-share d-flex gap-6 mt-2">
+                                                <li class="d-center">
+                                                    <a href="#" class="d-center gap-1 gap-sm-2 mdtxt">
+                                                        <i class="material-symbols-outlined mat-icon"> favorite </i>
+                                                        
+                                                    </a>
+                                                </li>
+                                                <li class="d-center flex-column">
+                                                    <button class="d-center gap-1 gap-sm-2 mdtxt reply-btn">
+                                                        <i class="material-symbols-outlined mat-icon"> chat </i>
+                                                        Comment
+                                                    </button>
+                                                </li>
+                                                <li class="d-center flex-column">
+                                                    <button class="d-center gap-1 gap-sm-2">
+                                                        <i class="material-symbols-outlined mat-icon"> share </i>
+                                                        Share
+                                                    </button>
+                                                </li>
+                                                
+                                            </ul>
+                                            <form class="comment-form text-white">
+                                                <div style="max-height: 400px; overflow-y:scroll; scrollbar-width: none">
+                                                    <!-- Single comment -->
+                                                    <div class="parent-comment mt-3 d-flex gap-2 gap-sm-4">
+                                                        <div class=" d-center ">
+                                                            <img class="avatar-img max-un" src="{% static 'assets/images/avatar-3.png' %}" alt="avatar">
+                                                        </div>
+                                                        <div class="info-item">
+                                                            <div class="top-area px-4 py-3 d-flex gap-3 align-items-start justify-content-between">
+                                                                <div class="title-area">
+                                                                    <h6 class="m-0 mb-3 d-flex align-items justify-content-between">
+                                                                        <a href="public-profile-post.html">Lori Cortez</a> 
+                                                                        <a href="#" class="d-center gap-1 gap-sm-2 mdtxt">
+                                                                            30k Likes
+                                                                            <i class="material-symbols-outlined mat-icon"> favorite </i>
+                                                                        </a>
+                                                                    </h6>
+                                                                    <p class="mdtxt">The only way to solve the problem is to code for the hardware directly The only way to solve the problem is to code for the hardware directly The only way to solve the problem is to code for the hardware directly</p>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+
+                                                <form action="#">
+                                                    <div class="d-flex mt-5 gap-3">
+                                                        <div class="profile-box d-none d-xxl-block">
+                                                            <a href="#"><img src="{% static 'assets/images/add-post-avatar.png' %}" class="max-un" alt="icon"></a>
+                                                        </div>
+                                                        <div class="form-content input-area py-1 d-flex gap-2 align-items-center w-100">
+                                                            <input placeholder="Write a comment..">
+                                                            <div class="file-input d-flex gap-1 gap-md-2">
+                                                                <div class="file-upload">
+                                                                    <label class="file">
+                                                                        <input type="file">
+                                                                        <span class="file-custom border-0 d-grid text-center">
+                                                                            <span class="material-symbols-outlined mat-icon m-0 xxltxt"> gif_box </span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="file-upload">
+                                                                    <label class="file">
+                                                                        <input type="file">
+                                                                        <span class="file-custom border-0 d-grid text-center">
+                                                                            <span class="material-symbols-outlined mat-icon m-0 xxltxt"> perm_media </span>
+                                                                        </span>
+                                                                    </label>
+                                                                </div>
+                                                                <span class="mood-area">
+                                                                    <span class="material-symbols-outlined mat-icon m-0 xxltxt"> mood </span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="btn-area d-flex">
+                                                            <button class="cmn-btn px-2 px-sm-5 px-lg-6">
+                                                                <i class="material-symbols-outlined mat-icon m-0 fs-xxl"> near_me </i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </form>
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                            </div>
+                            <!-- Post Comments end -->
+                            
+                            <!-- Post Image popup start -->
+                            <div class="go-live-popup video-popup">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <div class="modal cmn-modal fade" id="imageView">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content p-5">
+                                                        <div class="modal-header justify-content-center">
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                                <i class="material-symbols-outlined mat-icon xxltxt"> close </i>
+                                                            </button>
+                                                        </div>
+                                                        
+                                                        <div class="mid-area">
+                                                            <div class="d-flex mb-5 gap-3">
+                                                                
+                                                                
+                                                            <div class="file-upload">
+                                                                 <img src="{% static 'assets/images/post-img-1.png' %}" class="w-100" alt="image">
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Post Image popup end -->
+                        </div>
+                       
+                            
+
+                        
+                    </div>
+                </div>
+                </div>
+                {% include "includes/rightbar.html" %}
+            </div>
+        </div>
+    </main>
+    <!-- Main Content end -->
+
+    
+
+    <!-- Go Live Popup start -->
+    <div class="go-live-popup">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="modal cmn-modal fade" id="goLiveMod">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content p-5">
+                                <div class="modal-header justify-content-center">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                        <i class="material-symbols-outlined mat-icon xxltxt"> close </i>
+                                    </button>
+                                </div>
+                                <div class="top-content pb-5">
+                                    <h5>Go Live</h5>
+                                </div>
+                                <div class="mid-area">
+                                    <div class="d-flex mb-5 gap-3">
+                                        <div class="profile-box">
+                                            <a href="#"><img src="{% static 'assets/images/add-post-avatar.png' %}" class="max-un" alt="icon"></a>
+                                        </div>
+                                        <textarea cols="10" rows="2" placeholder="Write something to Lerio.."></textarea>
+                                    </div>
+                                    <div class="file-upload">
+                                        <label>Upload attachment</label>
+                                        <label class="file mt-1">
+                                            <input type="file">
+                                            <span class="file-custom pt-8 pb-8 d-grid text-center">
+                                                <i class="material-symbols-outlined mat-icon"> perm_media </i>
+                                                <span>Drag here or click to upload photo.</span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="footer-area pt-5">
+                                    <div class="btn-area d-flex justify-content-end gap-2">
+                                        <button type="button" class="cmn-btn alt" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                                        <button class="cmn-btn">Go Live</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Go Live Popup end -->
+
+    <!-- video popup start -->
+    <div class="go-live-popup video-popup">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="modal cmn-modal fade" id="photoVideoMod">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content p-5">
+                                <div class="modal-header justify-content-center">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                        <i class="material-symbols-outlined mat-icon xxltxt"> close </i>
+                                    </button>
+                                </div>
+                                <div class="top-content pb-5">
+                                    <h5>Add post photo/video</h5>
+                                </div>
+                                <div class="mid-area">
+                                    <div class="d-flex mb-5 gap-3">
+                                        <div class="profile-box">
+                                            <a href="#"><img src="{% static 'assets/images/add-post-avatar.png' %}" class="max-un" alt="icon"></a>
+                                        </div>
+                                        <textarea cols="10" rows="2" placeholder="Write something to Lerio.."></textarea>
+                                    </div>
+                                    <div class="file-upload">
+                                        <label>Upload attachment</label>
+                                        <label class="file mt-1" >
+                                            <input type="file" name="image">
+                                            <span class="file-custom pt-8 pb-8 d-grid text-center">
+                                                <i class="material-symbols-outlined mat-icon"> perm_media </i>
+                                                <span>Click to upload photo.</span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="footer-area pt-5">
+                                    <div class="btn-area d-flex justify-content-end gap-2">
+                                        <button type="button" class="cmn-btn alt" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                                        <button class="cmn-btn">Post</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- video popup end -->
+
+    <!-- Go Live Popup start -->
+    <div class="go-live-popup">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="modal cmn-modal fade" id="activityMod">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content p-5">
+                                <div class="modal-header justify-content-center">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                        <i class="material-symbols-outlined mat-icon xxltxt"> close </i>
+                                    </button>
+                                </div>
+                                <div class="top-content pb-5">
+                                    <h5>Create post</h5>
+                                </div>
+                                <div class="mid-area">
+                                    <div class="d-flex mb-5 gap-3">
+                                        <div class="profile-box">
+                                            <a href="#"><img src="{% static 'assets/images/add-post-avatar.png' %}" class="max-un" alt="icon"></a>
+                                        </div>
+                                        <textarea cols="10" rows="2" placeholder="Write something to Lerio.."></textarea>
+                                    </div>
+                                    <div class="file-upload">
+                                        <label>Upload attachment</label>
+                                        <label class="file mt-1">
+                                            <input type="file">
+                                            <span class="file-custom pt-8 pb-8 d-grid text-center">
+                                                <i class="material-symbols-outlined mat-icon"> perm_media </i>
+                                                <span>Drag here or click to upload photo.</span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="tooltips-area d-flex mt-3 gap-2">
+                                        <button type="button" class="btn d-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Fallings/Activity">
+                                            <i class="material-symbols-outlined mat-icon"> mood </i>
+                                        </button>
+                                        <button type="button" class="btn d-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Video">
+                                            <i class="material-symbols-outlined mat-icon"> movie </i>
+                                        </button>
+                                        <button type="button" class="btn d-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Maps">
+                                            <i class="material-symbols-outlined mat-icon"> location_on </i>
+                                        </button>
+                                        <button type="button" class="btn d-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Tag">
+                                            <i class="material-symbols-outlined mat-icon"> sell </i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="footer-area d-flex justify-content-between pt-5">
+                                    <div class="left-area">
+                                        <select>
+                                            <option value="1">Public</option>
+                                            <option value="2">Only Me</option>
+                                            <option value="3">Friends</option>
+                                            <option value="4">Custom</option>
+                                        </select>
+                                    </div>
+                                    <div class="btn-area d-flex justify-content-end gap-2">
+                                        <button type="button" class="cmn-btn alt" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                                        <button class="cmn-btn">Post</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Go Live Popup end -->
+
+    <script>
+    
+        // This updates the Profile Picture
+        const profilePhoto = document.querySelector('input[name="image"]');
+
+        profilePhoto.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        const image = document.querySelector('#avatar');
+
+        if (file && file.type.includes('image')) {
+            const url = URL.createObjectURL(file);
+            image.src = url;
+        }
+        });
+
+        
+
+        // This updates the name
+        //const display_nameInput = document.getElementById('id_displayname');
+        //const display_nameOutput = document.getElementById('displayname');
+
+        //display_nameInput.addEventListener('input', (event) => {
+           // display_nameOutput.innerText = event.target.value;
+        //});
+
+    </script>
+    
+{% endblock %}
+    

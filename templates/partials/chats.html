@@ -34,7 +34,7 @@
                                             {% if user.friend.image %}
                                                 {{user.friend.image.url}}
                                             {% else %}
-                                                {% static 'assets/images/users/avatar-2.jpg' %}
+                                                {% static 'assetss/images/users/avatar-2.jpg' %}
                                             {% endif %}
                                                 " alt="user-img" class="img-fluid rounded-circle">
                                             <span class="user-status"></span>
@@ -79,14 +79,14 @@
                                         <img src="{% if chat.receiver.image %}
                                             {{chat.receiver.image.url}}
                                         {% else %}
-                                        {% static 'assets/images/users/avatar-3.jpg' %}
+                                        {% static 'assetss/images/users/avatar-3.jpg' %}
                                         {% endif %}" class="rounded-circle avatar-xs" alt="">
                                         <span class="user-status"></span>
                                         {% else %}
                                             <img src="{% if chat.sender.image %}
                                             {{chat.sender.image.url}}
                                             {% else %}
-                                            {% static 'assets/images/users/avatar-3.jpg' %}
+                                            {% static 'assetss/images/users/avatar-3.jpg' %}
                                             {% endif %}" class="rounded-circle avatar-xs" alt="">
                                             <span class="user-status"></span>
                                         {% endif %}

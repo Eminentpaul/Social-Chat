@@ -1,0 +1,344 @@
+
+{% extends 'base/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+    
+
+    <!-- Bottom Menu start -->
+    {% include "includes/bottom-menu.html" %}
+    <!-- Bottom Menu end -->
+
+    <!-- Main Content start -->
+    <main class="main-content">
+        <div class="container">
+            <div class="row profile-picture-area">
+                <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-8">
+                    <div class="single-box p-3">
+                        <div class="d-block d-lg-none position-absolute end-0 top-0">
+                            <button class="button profile-close">
+                                <i class="material-symbols-outlined mat-icon fs-xl"> close </i>
+                            </button>
+                        </div>
+                        <div class="upload-single">
+                            <div class="profile-picture text-start">
+                                <img id='avatar' class="preview-image w-100" src="{{user.profile.avatar}}" alt="Preview Image">
+                            </div>
+                            <div class="file-upload">
+                                <form method='post' enctype="multipart/form-data" class="text-center d-grid gap-4">
+                                    {% csrf_token %}
+                                <label class="file text-center mt-4">
+                                    <input type="file" name='image' id="profile">
+                                    <span class="cmn-btn d-center gap-1">
+                                        <i class="material-symbols-outlined mat-icon fs-2"> edit_note </i>
+                                        Change Profile Photo
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-9 col-lg-8">
+                    <div class="head-area mb-5">
+                        <h6>Edit Profile</h6>
+                    </div>
+                        <div class="single-box p-5">
+                            <div class="col-md-12">
+                                <div class="upload-single cover-img">
+                                    <div class="head-area mb-2 text-start">
+                                        <h6>Cover Image</h6>
+                                    </div>
+                                    <div style="height: 300px; overflow:hidden" class="profile-picture position-relative text-start">
+                                        <img style="height:auto;" class="preview-image w-100" src="{{user.profile.cover_pic}}" alt="Preview Image">
+                                        <div class="file-upload position-absolute p-4 bottom-0 end-0">
+                                            <label class="file text-start mt-2">
+                                                <input type="file" name='cover_photo'>
+                                                <span class="cmn-btn d-center gap-1">
+                                                    <i class="material-symbols-outlined mat-icon fs-2"> edit_note </i>
+                                                    Change Cover Photo
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single-box p-3 p-sm-5">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="single-input text-start">
+                                        <label for="name">{{form.first_name.label|title}}</label>
+                                        <div class="input-area second">
+                                            {{form.first_name|attr:"placeholder:First Name"}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="single-input text-start">
+                                        <label for="name">{{form.last_name.label|title}}</label>
+                                        <div class="input-area second">
+                                            {{form.last_name|attr:"placeholder:Last Name"}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="single-input text-start">
+                                        <label for="name">{{form.phone_number.label|title}}</label>
+                                        <div class="input-area second">
+                                            {{form.phone_number|attr:"placeholder:Phone Number"}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="single-input text-start">
+                                        <label for="name">Your {{form.location.label|title}}</label>
+                                        <div class="input-area second">
+                                            {{form.location|attr:"placeholder:Your Location"}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="single-input text-start">
+                                        <label for="name">{{form.website.label|title}}</label>
+                                        <div class="input-area second">
+                                            {{form.website|attr:"placeholder:www.example.com"}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="single-input text-start">
+                                        <label for="name">{{form.school_degree.label|title}}</label>
+                                        <div class="input-area second">
+                                            {{form.school_degree|attr:"placeholder:SSCE, OND, HND, B.Sc, Masters, Ph.D, "}}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-sm-12">
+                                    <div class="head-area mt-5 text-start">
+                                      
+                                        <label for="bio">Bio</label>
+                                        <div class="input-area second">
+                                            {{form.bio|attr:"rows:4"}}
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-sm-12 mt-4">
+                                    <div class="btn-area text-end">
+                                        <button class="cmn-btn">Saved Change</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Main Content end -->
+
+    <!-- Go Live Popup start -->
+    <div class="go-live-popup">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="modal cmn-modal fade" id="goLiveMod">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content p-5">
+                                <div class="modal-header justify-content-center">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                        <i class="material-symbols-outlined mat-icon xxltxt"> close </i>
+                                    </button>
+                                </div>
+                                <div class="top-content pb-5">
+                                    <h5>Go Live</h5>
+                                </div>
+                                <div class="mid-area">
+                                    <div class="d-flex mb-5 gap-3">
+                                        <div class="profile-box">
+                                            <a href="#"><img src="{% static 'assets/images/add-post-avatar.png' %}" class="max-un" alt="icon"></a>
+                                        </div>
+                                        <textarea cols="10" rows="2" placeholder="Write something to Lerio.."></textarea>
+                                    </div>
+                                    <div class="file-upload">
+                                        <label>Upload attachment</label>
+                                        <label class="file mt-1">
+                                            <input type="file">
+                                            <span class="file-custom pt-8 pb-8 d-grid text-center">
+                                                <i class="material-symbols-outlined mat-icon"> perm_media </i>
+                                                <span>Drag here or click to upload photo.</span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="footer-area pt-5">
+                                    <div class="btn-area d-flex justify-content-end gap-2">
+                                        <button type="button" class="cmn-btn alt" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                                        <button class="cmn-btn">Go Live</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Go Live Popup end -->
+
+    <!-- video popup start -->
+    <div class="go-live-popup video-popup">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="modal cmn-modal fade" id="photoVideoMod">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content p-5">
+                                <div class="modal-header justify-content-center">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                        <i class="material-symbols-outlined mat-icon xxltxt"> close </i>
+                                    </button>
+                                </div>
+                                <div class="top-content pb-5">
+                                    <h5>Add post photo/video</h5>
+                                </div>
+                                <div class="mid-area">
+                                    <div class="d-flex mb-5 gap-3">
+                                        <div class="profile-box">
+                                            <a href="#"><img src="{% static 'assets/images/add-post-avatar.png' %}" class="max-un" alt="icon"></a>
+                                        </div>
+                                        <textarea cols="10" rows="2" placeholder="Write something to Lerio.."></textarea>
+                                    </div>
+                                    <div class="file-upload">
+                                        <label>Upload attachment</label>
+                                        <label class="file mt-1">
+                                            <input type="file">
+                                            <span class="file-custom pt-8 pb-8 d-grid text-center">
+                                                <i class="material-symbols-outlined mat-icon"> perm_media </i>
+                                                <span>Drag here or click to upload photo.</span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="footer-area pt-5">
+                                    <div class="btn-area d-flex justify-content-end gap-2">
+                                        <button type="button" class="cmn-btn alt" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                                        <button class="cmn-btn">Post</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- video popup end -->
+
+    <!-- Go Live Popup start -->
+    <div class="go-live-popup">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="modal cmn-modal fade" id="activityMod">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content p-5">
+                                <div class="modal-header justify-content-center">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                        <i class="material-symbols-outlined mat-icon xxltxt"> close </i>
+                                    </button>
+                                </div>
+                                <div class="top-content pb-5">
+                                    <h5>Create post</h5>
+                                </div>
+                                <div class="mid-area">
+                                    <div class="d-flex mb-5 gap-3">
+                                        <div class="profile-box">
+                                            <a href="#"><img src="{% static 'assets/images/add-post-avatar.png' %}" class="max-un" alt="icon"></a>
+                                        </div>
+                                        <textarea cols="10" rows="2" placeholder="Write something to Lerio.."></textarea>
+                                    </div>
+                                    <div class="file-upload">
+                                        <label>Upload attachment</label>
+                                        <label class="file mt-1">
+                                            <input type="file">
+                                            <span class="file-custom pt-8 pb-8 d-grid text-center">
+                                                <i class="material-symbols-outlined mat-icon"> perm_media </i>
+                                                <span>Drag here or click to upload photo.</span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="tooltips-area d-flex mt-3 gap-2">
+                                        <button type="button" class="btn d-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Fallings/Activity">
+                                            <i class="material-symbols-outlined mat-icon"> mood </i>
+                                        </button>
+                                        <button type="button" class="btn d-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Video">
+                                            <i class="material-symbols-outlined mat-icon"> movie </i>
+                                        </button>
+                                        <button type="button" class="btn d-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Maps">
+                                            <i class="material-symbols-outlined mat-icon"> location_on </i>
+                                        </button>
+                                        <button type="button" class="btn d-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Tag">
+                                            <i class="material-symbols-outlined mat-icon"> sell </i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="footer-area d-flex justify-content-between pt-5">
+                                    <div class="left-area">
+                                        <select>
+                                            <option value="1">Public</option>
+                                            <option value="2">Only Me</option>
+                                            <option value="3">Friends</option>
+                                            <option value="4">Custom</option>
+                                        </select>
+                                    </div>
+                                    <div class="btn-area d-flex justify-content-end gap-2">
+                                        <button type="button" class="cmn-btn alt" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                                        <button class="cmn-btn">Post</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Go Live Popup end -->
+
+
+    <script>
+    
+        // This updates the Profile Picture
+        const profilePhoto = document.querySelector('input[name="image"]');
+
+        profilePhoto.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        const image = document.querySelector('#avatar');
+
+        if (file && file.type.includes('image')) {
+            const url = URL.createObjectURL(file);
+            image.src = url;
+        }
+        });
+
+        
+
+        // This updates the name
+        //const display_nameInput = document.getElementById('id_displayname');
+        //const display_nameOutput = document.getElementById('displayname');
+
+        //display_nameInput.addEventListener('input', (event) => {
+           // display_nameOutput.innerText = event.target.value;
+        //});
+
+    </script>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% load static %}
+
+<div class="single-item d-none d-lg-block profile-area position-relative">
+    <div class="profile-pic d-flex align-items-center">
+        <span class="avatar cmn-head active-status">
+            <img style="width: 48px" class="avatar-img max-un" src="{{user.profile.avatar}}" alt="avatar">
+        </span>
+    </div>
+    <div class="main-area p-5 profile-content">
+        <div class="head-area">
+            <div class="d-flex gap-3 align-items-center">
+                <div style="width: 48px" class="avatar-item">
+                    <img class="avatar-img max-un" src="{{user.profile.avatar}}" alt="avatar">
+                </div>
+                <div class="text-area">
+                    <h6 class="m-0 mb-1">{{user.profile.display_name}}</h6>
+                    <p class="mdtxt">{{user.profile.location}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="view-profile my-2">
+            <a href="{% url 'profile' user.id %}" class="mdtxt w-100 text-center py-2">View profile</a>
+        </div>
+        <ul>
+            <li>
+                <a href="profile-edit.html" class="mdtxt">
+                    <i class="material-symbols-outlined mat-icon"> settings </i>
+                    Settings & Privacy
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}" class="mdtxt">
+                    <i class="material-symbols-outlined mat-icon"> power_settings_new </i>
+                    Sign Out
+                </a>
+            </li>
+        </ul>
+        <div class="switch-wrapper mt-4 d-flex gap-1 align-items-center">
+            <i class="mat-icon material-symbols-outlined sun icon"> light_mode </i>
+            <label class="switch">
+                <input type="checkbox" class="checkbox">
+                <span class="slider"></span>
+            </label>
+            <i class="mat-icon material-symbols-outlined moon icon"> dark_mode </i>
+            <span class="mdtxt ms-2">Dark mode</span>
+        </div>
+    </div>
+</div>

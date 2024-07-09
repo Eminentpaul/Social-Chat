@@ -1,0 +1,94 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Circlehub">
+    <meta name="description" content="Circlehub HTML5 Template">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Circlehub - Feeds </title>
+
+    <link rel="shortcut icon" href="assets/images/fav.png" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+
+<body>
+
+    <!-- start preloader -->
+    <div class="preloader align-items-center justify-content-center">
+        <span class="loader"></span>
+    </div>
+    <!-- end preloader -->
+
+    <!-- Scroll To Top Start-->
+    <button class="scrollToTop d-none d-lg-block"><i class="mat-icon fas fa-angle-double-up"></i></button>
+    <!-- Scroll To Top End -->
+
+    <!-- header-section start -->
+    <header class="header-section header-menu">
+        <nav class="navbar navbar-expand-lg p-0">
+            <div class="container">
+                <nav class="navbar w-100 navbar-expand-lg justify-content-betweenm">
+                    <a href="/" class="navbar-brand">
+                        <img src="{% static 'assets/images/logo.png' %}" class="logo" alt="logo">
+                    </a>
+                    <button class="button search-active d-block d-md-none">
+                        <i class="d-center material-symbols-outlined fs-xxl mat-icon"> search </i>
+                    </button>
+                    <div class="search-form">
+                        <form action="#" class="input-area d-flex align-items-center">
+                            <i class="material-symbols-outlined mat-icon">search</i>
+                            <input type="text" placeholder="Search Circlehubtio" autocomplete="off">
+                        </form>
+                    </div>
+                    <ul class="navbar-nav feed flex-row gap-xl-20 gap-lg-10 gap-sm-7 gap-1 py-4 py-lg-0 m-lg-auto ms-auto ms-aut align-self-center">
+                        <li>
+                            <a href="/" class="nav-icon home active"><i class="mat-icon fs-xxl material-symbols-outlined mat-icon">home</i></a>
+                        </li>
+                        <li>
+                            <a href="/" class="nav-icon feed"><i class="mat-icon fs-xxl material-symbols-outlined mat-icon">feed</i></a>
+                        </li>
+                        <li>
+                            <a href="group.html" class="nav-icon"><i class="mat-icon fs-xxl material-symbols-outlined mat-icon">group</i></a>
+                        </li>
+                        <li>
+                            <a href="videos.html" class="nav-icon"><i class="mat-icon fs-xxl material-symbols-outlined mat-icon">smart_display</i></a>
+                        </li>
+                    </ul>
+                    <div class="right-area position-relative d-flex gap-3 gap-xxl-6 align-items-center">
+                        
+                        {% include "includes/feed-chats.html" %}
+                        {% include "includes/feed-notify.html" %}
+                        {% include "includes/feed-user.html" %}
+                        
+                        
+                    </div>
+                </nav>
+            </div>
+        </nav>
+    </header>
+    <!-- header-section end -->
+
+{% block content %}
+    
+{% endblock %}
+    
+
+<!--==================================================================-->
+    <script src="{% static 'assets/js/plugins/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/slick.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/plyr.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/apexcharts.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/wow.min.js' %}"></script>
+    <script src="{% static 'assets/js/plugins/plugin.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

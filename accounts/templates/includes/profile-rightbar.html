@@ -1,0 +1,57 @@
+{% load static %}
+
+<div class="col-xxl-3 col-xl-4 col-lg-5">
+    <div class="sidebar-wrapper d-flex al-item justify-content-end justify-content-xl-center flex-column flex-md-row flex-xl-column flex gap-6">
+        <div class="sidebar-area p-5">
+            <div class="mb-4">
+                <h6 class="d-inline-flex">
+                    Contact
+                </h6>
+            </div>
+            <div class="d-flex flex-column gap-6">
+                
+                
+                {% for contact in contacts %}
+                    
+                    {% if contact.friend != user %}
+                        <div class="profile-area d-center justify-content-between">
+                            <div class="avatar-item d-flex gap-3 align-items-center">
+                                <div class="avatar-item">
+                                    <img style="width:48px" class="avatar-img max-un" src="{{contact.friend.profile.avatar}}" alt="avatar">
+                                </div>
+                                <div class="info-area">
+                                    <h6 class="m-0"><a href="{% url 'profile' contact.friend.id %}" class="mdtxt">{{contact.friend.profile.display_name}}</a></h6>
+                                </div>
+                            </div>
+                            <div class="btn-group cus-dropdown dropend">
+                                <button type="button" class="dropdown-btn" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="material-symbols-outlined fs-xxl m-0"> more_horiz </i>
+                                </button>
+                                <ul class="dropdown-menu p-4 pt-2">
+                                    <li>
+                                        <a class="droplist d-flex align-items-center gap-2" href="#">
+                                            <i class="material-symbols-outlined mat-icon"> lock </i>
+                                            <span>Block</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="droplist d-flex align-items-center gap-2" href="#">
+                                            <i class="material-symbols-outlined mat-icon"> hide_source </i>
+                                            <span>Hide Contact</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    {% endif %}
+                        
+
+                {% empty %}
+                <h6 class="m-0"><a href="public-profile-post.html" class="mdtxt">You Don't have contact yet</a></h6>
+                {% endfor %}
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>

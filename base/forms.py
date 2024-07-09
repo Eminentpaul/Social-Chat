@@ -10,6 +10,7 @@ class UserForm(UserCreationForm):
         
 
 class UpdateAccountImage(ModelForm):
-    class Meta:
-        model = User
-        fields = ['image']
+    pass
+#     class Meta:
+#         model = User
+#         fields = ['image']

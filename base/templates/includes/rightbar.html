@@ -1,0 +1,106 @@
+{% load static %}
+
+<div class="col-xxl-3 col-xl-4 col-lg-4 col-6 mt-5 mt-xl-0">
+    <div class="cus-overflow cus-scrollbar sidebar-head">
+        <div class="d-flex justify-content-end">
+            <div class="d-block d-xl-none me-4">
+                <button class="button toggler-btn mb-4 mb-lg-0 d-flex align-items-center gap-2">
+                    <span>My List</span>
+                    <i class="material-symbols-outlined mat-icon"> tune </i>
+                </button>
+            </div>
+        </div>
+        <div class="cus-scrollbar side-wrapper">
+            <div class="sidebar-wrapper d-flex flex-column gap-6">
+                <div class="sidebar-area p-5">
+                    <div class=" mb-4">
+                        <h6 class="d-inline-flex position-relative">
+                            Request
+                            <span class="mdtxt abs-area d-center position-absolute">{{friend_requests.count}}</span>
+                        </h6>
+                    </div>
+                    <div class="d-grid gap-6">
+                        
+                        {% for friend in friend_requests %}
+                            
+                        <div class="single-single">
+                            <div class="profile-pic d-flex gap-3 align-items-center">
+                                <div class="avatar">
+                                    <img style="width: 48px" class="avatar-img max-un" src="{{friend.sender.profile.avatar}}" alt="avatar">
+                                </div>
+                                <div class="text-area">
+                                    <a href="public-profile-post.html"><h6 class="m-0">{{friend.sender.profile.display_name}}</h6></a>
+                                    <div class="friends-list d-flex gap-3 align-items-center text-center">
+                                        
+                                        <span class="mdtxt d-center">10 mutual friends</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-3 mt-4">
+                                <a href="{% url 'accept' friend.id %}" class="cmn-btn">Confirm</a>
+                                <a href="{% url 'reject' friend.id %}" class="cmn-btn alt">Delete</a>
+                            </div>
+                        </div>
+
+                        {% empty %}
+
+                        <h6 class="m-0">No Friend Rquest</h6>
+                        {% endfor %}
+                            
+                        
+                    </div>
+                </div>
+                <div class="sidebar-area p-5">
+                    <div class="mb-4">
+                        <h6 class="d-inline-flex">
+                            Friends Online
+                        </h6>
+                    </div>
+                    <div class="d-flex flex-column gap-6">
+                        
+                        
+                        {% for contact  in contacts %}
+                            
+                            {% if contact.friend.is_online %}
+                                <div class="profile-area d-center justify-content-between">
+                                    <div class="avatar-item d-flex gap-3 align-items-center">
+                                        <div style="height:48px; overflow:hidden" class="avatar-item">
+                                            <img  style="max-width:48px;object-fit:cover" class="avatar-img max-un" src="{{contact.friend.profile.avatar}}" alt="avatar">
+                                        </div>
+                                        <div class="info-area">
+                                            <h6 class="m-0"><a href="{% url 'profile' contact.friend.id %}" class="mdtxt">{{contact.friend.profile.display_name}}</a></h6>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group cus-dropdown dropend">
+                                        <button type="button" class="dropdown-btn" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="material-symbols-outlined fs-xxl m-0"> more_horiz </i>
+                                        </button>
+                                        <ul class="dropdown-menu p-4 pt-2">
+                                            <li>
+                                                <a class="droplist d-flex align-items-center gap-2" href="#">
+                                                    <i class="material-symbols-outlined mat-icon"> person_remove </i>
+                                                    <span>Unfollow</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="droplist d-flex align-items-center gap-2" href="#">
+                                                    <i class="material-symbols-outlined mat-icon"> hide_source </i>
+                                                    <span>Hide Contact</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                {% else %}
+                                    <h6 class="m-0"><a href="public-profile-post.html" class="mdtxt">None of your friends is online</a></h6>
+                            {% endif %}
+                                
+                        {% endfor %}
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

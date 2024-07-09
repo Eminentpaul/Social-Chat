@@ -1,0 +1,59 @@
+{% load static %}
+
+<div class="tab-pane fade show active" id="followers-tab-pane" role="tabpanel" aria-labelledby="followers-tab" tabindex="0">
+    <div class="search-area d-center my-7 flex-wrap gap-2 justify-content-between">
+        <div class="total-followers">
+            <h6>{{followers.count}} Followers</h6>
+        </div>
+        <form action="#" class="d-flex align-items-stretch justify-content-between gap-4">
+            <div class="input-area py-2 w-100 gap-2 d-flex align-items-center">
+                <i class="material-symbols-outlined mat-icon">search</i>
+                <input type="text" placeholder="Search" autocomplete="off">
+            </div>
+        </form>
+    </div>
+    <div class="row">
+
+        
+        {% for user in followers %}
+            
+        <div class="col-md-6">
+            <div class="single-box member-single p-3">
+                <div class="profile-area d-center justify-content-between">
+                    <div class="avatar-item d-flex gap-3 align-items-center">
+                        <div class="avatar-item">
+                            <img style='width:48px' class="avatar-img max-un" src="{{user.profile.avatar}}" alt="avatar">
+                        </div>
+                        <div class="info-area text-start">
+                            <h6 class="m-0"><a href="{% url 'profile' user.id %}">{{user.profile.display_name}}</a></h6>
+                            <p class="mdtxt status">{{user.profile.location}}</p>
+                        </div>
+                    </div>
+                    <div class="group-btn cus-dropdown">
+                        <button type="button" class="dropdown-btn" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="material-symbols-outlined fs-xxl m-0"> more_horiz </i>
+                        </button>
+                        <ul class="dropdown-menu p-4 pt-2">
+                            <li>
+                                <a class="droplist d-flex align-items-center gap-2" href="#">
+                                    <i class="material-symbols-outlined mat-icon"> person_remove </i>
+                                    <span>Unfollow</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="droplist d-flex align-items-center gap-2" href="#">
+                                    <i class="material-symbols-outlined mat-icon"> hide_source </i>
+                                    <span>Hide Contact</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+            
+        
+        
+    </div>
+</div>
